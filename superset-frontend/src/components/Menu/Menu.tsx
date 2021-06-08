@@ -309,5 +309,7 @@ export default function MenuWrapper({ data, ...rest }: MenuProps) {
   newMenuData.menu = cleanedMenu;
   newMenuData.settings = settings;
 
+  // set "lang" attribute for accessibility
+  document.documentElement.lang = newMenuData.navbar_right.locale;  
   return <Menu data={newMenuData} {...rest} />;
 }

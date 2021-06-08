@@ -34,7 +34,7 @@ interface FaveStarProps {
 const StyledLink = styled.a`
   font-size: ${({ theme }) => theme.typography.sizes.xl}px;
   display: flex;
-  padding: 0 0 0 0.5em;
+  margin: 0 0 0 0.5em;
 `;
 
 const FaveStar = ({
@@ -65,6 +65,7 @@ const FaveStar = ({
       className="fave-unfave-icon"
       data-test="fave-unfave-icon"
       role="button"
+      aria-describedby="fave-unfave-tooltip"
     >
       <Icon name={isStarred ? 'favorite-selected' : 'favorite-unselected'} />
     </StyledLink>

@@ -118,6 +118,10 @@ const StyledDashboardHeader = styled.div`
     flex-wrap: nowrap;
     .action-button {
       font-size: ${({ theme }) => theme.typography.sizes.xl}px;
+      &:focus,
+      &:hover {
+        background: ${({ theme }) => theme.colors.grayscale.light3};
+      }
     }
   }
 `;
@@ -486,6 +490,11 @@ class Header extends React.PureComponent {
                 tabIndex={0}
                 className="action-button"
                 onClick={this.toggleEditMode}
+                onKeyDown={event => {
+                  if (event.key === ' ' || event.key === 'Enter') {
+                    this.toggleEditMode();
+                  }
+                }}
               >
                 <Icon name="edit-alt" />
               </span>

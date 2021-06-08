@@ -87,6 +87,10 @@ const MENU_KEYS = {
 
 const DropdownButton = styled.div`
   margin-left: ${({ theme }) => theme.gridUnit * 2.5}px;
+
+  &:focus {
+    background: ${({ theme }) => theme.colors.grayscale.light3};
+  }
 `;
 
 const SCREENSHOT_NODE_SELECTOR = '.dashboard';
@@ -320,7 +324,16 @@ class HeaderActionsDropdown extends React.PureComponent {
           triggerNode.closest('.dashboard-header')
         }
       >
-        <DropdownButton id="save-dash-split-button" role="button">
+        <DropdownButton
+          id="save-dash-split-button"
+          role="button"
+          tabIndex="0"
+          onKeyDown={event => {
+            if (event.key === ' ' || event.key === 'Enter') {
+              event.target.click();
+            }
+          }}
+        >
           <Icon name="more-horiz" />
         </DropdownButton>
       </NoAnimationDropdown>

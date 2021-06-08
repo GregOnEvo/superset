@@ -92,6 +92,10 @@ const VerticalDotsContainer = styled.div`
   &:hover {
     cursor: pointer;
   }
+  &:focus,
+  &:hover {
+    background: ${({ theme }) => theme.colors.grayscale.light3};
+  }
 `;
 
 const RefreshTooltip = styled.div`
@@ -107,8 +111,17 @@ const RefreshTooltip = styled.div`
 
 const SCREENSHOT_NODE_SELECTOR = '.dashboard-component-chart-holder';
 
-const VerticalDotsTrigger = () => (
-  <VerticalDotsContainer>
+const VerticalDotsTrigger = props => (
+  <VerticalDotsContainer
+    role="button"
+    tabIndex="0"
+    onKeyDown={event => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.target.click();
+      }
+    }}
+    {...props}
+  >
     <span className="dot" />
     <span className="dot" />
     <span className="dot" />
@@ -334,13 +347,10 @@ class SliceHeaderControls extends React.PureComponent {
             triggerNode.closest(SCREENSHOT_NODE_SELECTOR)
           }
         >
-          <span
+          <VerticalDotsTrigger
             id={`slice_${slice.slice_id}-controls`}
-            role="button"
             aria-label="More Options"
-          >
-            <VerticalDotsTrigger />
-          </span>
+          />
         </NoAnimationDropdown>
       </>
     );
